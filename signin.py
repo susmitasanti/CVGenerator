@@ -1,5 +1,37 @@
 from tkinter import *
-from PIL import ImageTk   #pip install pillow
+from PIL import ImageTk #pip install pillow
+import pymysql
+from tkinter import messagebox
+
+
+def login_user():
+    if usernameEntry.get()=='' or passwordEntry.get()=='':
+        messagebox.showerror('Error','All fields Are Required')
+
+    else:
+        try:
+            con=pymysql.connect(host='127.0.0.1',user='root',password='Harshita@030712')
+            mycursor=con.cursor()
+        except:
+            messagebox.showerror('Error','Connection is not Established')
+            return
+
+        query = 'use registration'
+        mycursor.execute(query)
+        query='select * from signup where username=%s and password=%s'
+        mycursor.execute(query,(usernameEntry.get(),passwordEntry.get()))
+        row=mycursor.fetchone()
+        if row==None:
+            messagebox.showerror('Error','Invalid username or password')
+
+        else:
+            messagebox.showinfo('Success','Login is successful')
+
+
+
+def signup_page():
+    login_window.destroy()
+    import signup
 
 def hide():
     openeye.config(file='closeye.png')
@@ -57,7 +89,7 @@ forgetButton=Button(login_window,text='Forgot Password?',bd=0,bg='white',activeb
 
 forgetButton.place(x=715,y=295)
 
-loginButton=Button(login_window,text='Login',font=('Open Sans',16,'bold'),fg='white',bg='firebrick1',activeforeground='white',activebackground='firebrick1',cursor='hand2',bd=0)
+loginButton=Button(login_window,text='Login',font=('Open Sans',16,'bold'),fg='white',bg='firebrick1',activeforeground='white',activebackground='firebrick1',cursor='hand2',bd=0,width=19,command=login_user)
 loginButton.place(x=578,y=350)
 
 orlabel=Label(login_window,text="----------------OR---------------",font=('Open Sans',16),fg='firebrick1',bg='white')
@@ -75,6 +107,9 @@ twitterlabel.place(x=740,y=440)
 
 signuplabel=Label(login_window,text="Dont have an account?",font=('Open Sans',9,'bold'),fg='firebrick1',bg='white')
 signuplabel.place(x=590,y=500)
-newaccountButton=Button(login_window,text='Create new one',font=('Open Sans',9,'bold underline'),fg='blue',bg='white',activeforeground='blue',activebackground='firebrick1',cursor='hand2',bd=0)
+newaccountButton=Button(login_window,text='Create new one',font=('Open Sans',9,'bold underline'),fg='blue',bg='white',activeforeground='blue',activebackground='firebrick1',cursor='hand2',bd=0,command=signup_page)
 newaccountButton.place(x=727,y=500)
+
+
+
 login_window.mainloop()
