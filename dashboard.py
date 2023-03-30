@@ -1,42 +1,21 @@
+
+import tkinter as tk
 from tkinter import *
-from PIL import ImageTk #pip install pillow
+from PIL import ImageTk, Image
 from tkinter import ttk
+import pymysql
+from tkhtmlview import *
+from tkinterhtml import HtmlFrame
 
+class dashboard_page(loginpage):
+    def __init__(self, master=None):
+        super().__init__(master)
+        master=master
 
-dashboard_window=Tk()
+    # Create a Tkinter window
+        
+    
+# Define a function to handle button clicks
+    
 
-dashboard_window.geometry('990x660+50+50')
-dashboard_window.resizable(0,0)
-bgImage=ImageTk.PhotoImage(file='bg4.png')
-
-bgLabel=Label(dashboard_window,image=bgImage)
-bgLabel.pack()
-
-menu_bar=Menu()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-dashboard_window.mainloop()
+obj1=dashboard_page()

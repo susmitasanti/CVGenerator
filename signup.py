@@ -1,10 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
-from tkinter import ttk
-from tkinter.ttk import Combobox
 
+import pymysql 
 from PIL import ImageTk
-import pymysql
+# import pymysql
 
 def clear():
     emailEntry.delete(0,END)
