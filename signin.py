@@ -242,9 +242,9 @@ def login_user():
                 messagebox.showerror('Error','Connection is not Established')
                 return
 
-            query = 'use registration'
+            query = 'use cv_generator'
             mycursor.execute(query)
-            query='select * from signup where username=%s and password=%s'
+            query='select * from registration13 where email_id=%s and password=%s'
             mycursor.execute(query,(usernameEntry.get(),passwordEntry.get()))
             row=mycursor.fetchone()
             if row==None:
@@ -370,13 +370,13 @@ def dashboard_page():
         host="127.0.0.1",
         user="root",
         password="Harshita@030712",
-        database="trials_cvgenerator"    
+        database="cv_generator"    
             )
     # Create a cursor object
         cursor = connection.cursor()
 
     # Execute a SELECT statement to fetch data
-        cursor.execute('''SELECT * FROM internships WHERE name=%s''', (username_))
+        cursor.execute('''SELECT * FROM registration13 WHERE name=%s''', (username_))
 
     # Fetch all the rows using fetchall() method
         result = cursor.fetchone()
@@ -384,30 +384,61 @@ def dashboard_page():
          # Create a frame for the main content of the window
         content_frame = Frame(dashboard_window)
 
-        name = result[0]
-        domain = result[1]
-        from_date = result[2]
-        to_date = result[3]
+        name = result[1]
+        age = result[2]
+        phone_no = result[3]
+        gender = result[5]
+        branch = result[6]
+        degree= result[7]
+        from_date= result[8]
+        to_date= result[9]
+
 
         name_label = Label(content_frame, text="Name: ")
-        domain_label = Label(content_frame, text="Domain: ")
-        from_label = Label(content_frame, text="From: ")
-        to_label = Label(content_frame, text="To: ")
+        age_label = Label(content_frame, text="Age: ")
+        phone_label = Label(content_frame, text="Phone No.: ")
+        gender_label = Label(content_frame, text="Gender: ")
+        branch_label= Label(content_frame, text="Branch: ")
+        degree_label= Label(content_frame, text="Degree: ")
+        from_label= Label(content_frame, text="From: ")
+        to_label= Label(content_frame, text="To: ")
+
+
+
 
         name_value = Label(content_frame, text=name)
-        domain_value = Label(content_frame, text=domain)
+        age_value = Label(content_frame, text=age)
+        phone_value = Label(content_frame, text=phone_no)
+        gender_value = Label(content_frame, text=gender)
+        branch_value = Label(content_frame, text=branch)
+        degree_value = Label(content_frame, text=degree)
         from_value = Label(content_frame, text=from_date)
         to_value = Label(content_frame, text=to_date)
 
         
         name_label.grid(row=0, column=0)
         name_value.grid(row=0, column=1)
-        domain_label.grid(row=1, column=0)
-        domain_value.grid(row=1, column=1)
-        from_label.grid(row=2, column=0)
-        from_value.grid(row=2, column=1)
-        to_label.grid(row=3, column=0)
-        to_value.grid(row=3, column=1)
+
+        age_label.grid(row=1, column=0)
+        age_value.grid(row=1, column=1)
+
+        phone_label.grid(row=2, column=0)
+        phone_value.grid(row=2, column=1)
+
+        gender_label.grid(row=3, column=0)
+        gender_value.grid(row=3, column=1)
+
+        branch_label.grid(row=4, column=0)
+        branch_value.grid(row=4, column=1)
+
+        degree_label.grid(row=5, column=0)
+        degree_value.grid(row=5, column=1)
+
+        from_label.grid(row=6, column=0)
+        from_value.grid(row=6, column=1)
+
+        to_label.grid(row=7, column=0)
+        to_value.grid(row=7, column=1)
 
 
     # Pack the main content frame
@@ -469,7 +500,7 @@ def academics_page():
             cursor = connection.cursor()
 
             # Execute a SELECT statement to fetch data
-            cursor.execute('''SELECT * FROM internships WHERE name=%s''', (username_))
+            cursor.execute('''SELECT * FROM internship WHERE email_id=%s''', (username_))
             # Fetch all the rows using fetchall() method
             data = cursor.fetchall()
 
@@ -562,7 +593,7 @@ def cocurricular_page():
         cursor = connection.cursor()
 
         # Execute a SELECT statement to fetch data
-        cursor.execute("SELECT * FROM internships where name=%s", (username_))
+        cursor.execute('''SELECT  `activity_name`, `conducted_by`, `participation_level`, `rank` FROM `cocurricular` WHERE email_id=%s''', (username_))
 
         # Fetch all the rows using fetchall() method
         data = cursor.fetchall()
@@ -586,10 +617,10 @@ def cocurricular_page():
 
         # Add headings
         tree.heading("#0", text="", anchor=CENTER)
-        tree.heading("column1", text="Internship Name", anchor=CENTER)
-        tree.heading("column2", text="Domain", anchor=CENTER)
-        tree.heading("column3", text="From", anchor=CENTER)
-        tree.heading("column4", text="To", anchor=CENTER)
+        tree.heading("column1", text="Activity Name", anchor=CENTER)
+        tree.heading("column2", text="Conducted by", anchor=CENTER)
+        tree.heading("column3", text="Participation Level", anchor=CENTER)
+        tree.heading("column4", text="Rank", anchor=CENTER)
 
 
         # Add data to treeview
@@ -658,7 +689,7 @@ def extracurricular_page():
         cursor = connection.cursor()
 
         # Execute a SELECT statement to fetch data
-        cursor.execute("SELECT * FROM internships where name=%s", (username_))
+        cursor.execute("SELECT `event_name`, `activity_name`, `participation_level`, `rank` FROM `extra_curricular` WHERE email_id=%s", (username_))
 
         # Fetch all the rows using fetchall() method
         data = cursor.fetchall()
@@ -682,10 +713,10 @@ def extracurricular_page():
 
         # Add headings
         tree.heading("#0", text="", anchor=CENTER)
-        tree.heading("column1", text="Internship Name", anchor=CENTER)
-        tree.heading("column2", text="Domain", anchor=CENTER)
-        tree.heading("column3", text="From", anchor=CENTER)
-        tree.heading("column4", text="To", anchor=CENTER)
+        tree.heading("column1", text="Event Name", anchor=CENTER)
+        tree.heading("column2", text="Activity Name", anchor=CENTER)
+        tree.heading("column3", text="Participation Level", anchor=CENTER)
+        tree.heading("column4", text="Rank", anchor=CENTER)
 
 
         # Add data to treeview
@@ -754,7 +785,7 @@ def internship_page():
         cursor = connection.cursor()
 
             # Execute a SELECT statement to fetch data
-        cursor.execute('''SELECT * FROM internships WHERE name=%s''', (username_))
+        cursor.execute('''SELECT `name`, `domain`, `from_date`, `to_date` FROM `internship` WHERE email_id="%s"''', (username_))
             
 
             # Fetch all the rows using fetchall() method
@@ -779,7 +810,7 @@ def internship_page():
 
             # Add headings
         tree.heading("#0", text="", anchor=tk.CENTER)
-        tree.heading("column1", text="Internship Name", anchor=tk.CENTER)
+        tree.heading("column1", text="Name", anchor=tk.CENTER)
         tree.heading("column2", text="Domain", anchor=tk.CENTER)
         tree.heading("column3", text="From", anchor=tk.CENTER)
         tree.heading("column4", text="To", anchor=tk.CENTER)
@@ -849,7 +880,7 @@ def projects_page():
     cursor = connection.cursor()
 
     # Execute a SELECT statement to fetch data
-    cursor.execute('''SELECT * FROM internships WHERE name=%s''', (username_))
+    cursor.execute('''SELECT `project_name`, `tech_stack`, `project_description` FROM `projects` WHERE email_id=%s''', (username_))
     # Fetch all the rows using fetchall() method
     data = cursor.fetchall()
 
@@ -860,22 +891,20 @@ def projects_page():
     tree = ttk.Treeview(projects_window)
 
     # Define columns
-    tree["columns"] = ("column1", "column2", "column3", "column4")
+    tree["columns"] = ("column1", "column2", "column3")
 
     # Format columns
     tree.column("#0", width=0, stretch=NO)
     tree.column("column1", width=195, anchor=CENTER)
     tree.column("column2", width=195, anchor=CENTER)
     tree.column("column3", width=195, anchor=CENTER)
-    tree.column("column4", width=195, anchor=CENTER)
 
 
     # Add headings
     tree.heading("#0", text="", anchor=CENTER)
-    tree.heading("column1", text="Internship Name", anchor=CENTER)
-    tree.heading("column2", text="Domain", anchor=CENTER)
-    tree.heading("column3", text="From", anchor=CENTER)
-    tree.heading("column4", text="To", anchor=CENTER)
+    tree.heading("column1", text="Name", anchor=CENTER)
+    tree.heading("column2", text="Tech Stack", anchor=CENTER)
+    tree.heading("column3", text="Description", anchor=CENTER)
 
 
     # Add data to treeview
