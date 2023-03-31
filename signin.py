@@ -8,9 +8,9 @@ from PIL import ImageTk #pip install pillow
 from tkinter import messagebox
 from PIL import ImageTk, Image
 from tkinter import ttk
-import pymysql
-from tkhtmlview import *
-from tkinterhtml import HtmlFrame
+
+
+
 
 
 username_ = ""
@@ -241,9 +241,9 @@ def login_user():
                 messagebox.showerror('Error','Connection is not Established')
                 return
 
-            query = 'use registration'
+            query = 'use cv_generator'
             mycursor.execute(query)
-            query='select * from signup where username=%s and password=%s'
+            query='select * from registration13 where email_id=%s and password=%s'
             mycursor.execute(query,(usernameEntry.get(),passwordEntry.get()))
             row=mycursor.fetchone()
             if row==None:
@@ -276,7 +276,7 @@ def login_page():
         heading.place(x=605,y=120)
         usernameEntry=Entry(login_window,width=25,font=('Microsoft Yahei UI Light',11,'bold'),bd=0,fg='firebrick1')
         usernameEntry.place(x=580,y=200)
-        usernameEntry.insert(0,'Username')
+        usernameEntry.insert(0,'Email-id')
         usernameEntry.bind('<FocusIn>',user_enter)
 
         frame1=Frame(login_window,width=250,height=2,bg='firebrick1')
@@ -435,15 +435,15 @@ def academics_page():
 
 
             # Create a frame to hold the navbar buttons
-            navbar_frame = tk.Frame(academics_window, padx=15, pady=15)
+            navbar_frame = Frame(academics_window, padx=15, pady=15)
 
             # Create a button for each page
-            academics_button = tk.Button(navbar_frame, text="Academics", command=lambda: handle_click1("academics_page"), width=15, height=5, bg="firebrick1")
-            cocurricular_button = tk.Button(navbar_frame, text="Co-Curricular", command=lambda: handle_click1("cocurricular_page"), width=15, height=5)
-            extracurricular_button = tk.Button(navbar_frame, text="Extra-Curricular", command=lambda: handle_click1("extracurricular_page"), width=15, height=5)
-            internships_button = tk.Button(navbar_frame, text="Internships", command=lambda: handle_click1("internship_page"), width=15, height=5)
-            projects_button = tk.Button(navbar_frame, text="Projects", command=lambda: handle_click1("projects_page"), width=15, height=5)
-            button = tk.Button(navbar_frame, image=img_tk, compound="left", width=60, height=65)
+            academics_button = Button(navbar_frame, text="Academics", command=lambda: handle_click1("academics_page"), width=15, height=5, bg="firebrick1")
+            cocurricular_button = Button(navbar_frame, text="Co-Curricular", command=lambda: handle_click1("cocurricular_page"), width=15, height=5)
+            extracurricular_button = Button(navbar_frame, text="Extra-Curricular", command=lambda: handle_click1("extracurricular_page"), width=15, height=5)
+            internships_button = Button(navbar_frame, text="Internships", command=lambda: handle_click1("internship_page"), width=15, height=5)
+            projects_button = Button(navbar_frame, text="Projects", command=lambda: handle_click1("projects_page"), width=15, height=5)
+            button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65)
 
             # Pack the navbar buttons horizontally
             academics_button.pack(side="left")
@@ -473,7 +473,7 @@ def academics_page():
             data = cursor.fetchall()
 
             # Create a frame for the main content of the window
-            content_frame = tk.Frame(academics_window)
+            content_frame = Frame(academics_window)
 
             # Create a Treeview widget
             tree = ttk.Treeview(academics_window)
@@ -769,24 +769,24 @@ def internship_page():
         tree["columns"] = ("column1", "column2", "column3", "column4")
 
             # Format columns
-        tree.column("#0", width=0, stretch=tk.NO)
-        tree.column("column1", width=195, anchor=tk.CENTER)
-        tree.column("column2", width=195, anchor=tk.CENTER)
-        tree.column("column3", width=195, anchor=tk.CENTER)
-        tree.column("column4", width=195, anchor=tk.CENTER)
+        tree.column("#0", width=0, stretch=NO)
+        tree.column("column1", width=195, anchor=CENTER)
+        tree.column("column2", width=195, anchor=CENTER)
+        tree.column("column3", width=195, anchor=CENTER)
+        tree.column("column4", width=195, anchor=CENTER)
 
 
             # Add headings
-        tree.heading("#0", text="", anchor=tk.CENTER)
-        tree.heading("column1", text="Internship Name", anchor=tk.CENTER)
-        tree.heading("column2", text="Domain", anchor=tk.CENTER)
-        tree.heading("column3", text="From", anchor=tk.CENTER)
-        tree.heading("column4", text="To", anchor=tk.CENTER)
+        tree.heading("#0", text="", anchor=CENTER)
+        tree.heading("column1", text="Internship Name", anchor=CENTER)
+        tree.heading("column2", text="Domain", anchor=CENTER)
+        tree.heading("column3", text="From", anchor=CENTER)
+        tree.heading("column4", text="To", anchor=CENTER)
 
 
             # Add data to treeview
         for row in data:
-            tree.insert("", tk.END, text="", values=row)
+            tree.insert("", END, text="", values=row)
 
             # Pack the Treeview widget
         tree.pack()
