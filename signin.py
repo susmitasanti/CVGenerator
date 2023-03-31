@@ -25,8 +25,7 @@ data=""
 
 login_window=""
 
-dashboard_page=""
-dashboard_window=""
+
 
 internship_page=""
 internship_window=""
