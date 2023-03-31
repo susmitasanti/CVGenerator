@@ -8,6 +8,8 @@ from PIL import ImageTk #pip install pillow
 from tkinter import messagebox
 from PIL import ImageTk, Image
 from tkinter import ttk
+from tkinter.ttk import Combobox
+
 
 
 
@@ -42,6 +44,18 @@ extracurricular_window=""
 projects_page=""
 projects_window=""
 
+activity_Combobox=""
+conductEntry=""
+part_Combobox=""
+rankEntry=""
+
+
+def forms_connection():
+    cursor = connection.cursor()
+
+    cursor.execute('''INSERT INTO `cocurricular`(`email_id`, `activity_name`, `conducted_by`, `participation_level`, `rank`) VALUES (%s,%s,%s,%s,%s)''', (username_), activity_Combobox.get(), conductEntry.get(), part_Combobox.get(), rankEntry.get() )
+
+    connection.commit()    
     
 def set_username(name):
     global signin
@@ -72,7 +86,7 @@ def show():
 
 def user_enter(event):
         global usernameEntry
-        if usernameEntry.get()=='Username':
+        if usernameEntry.get()=='Email-id':
             usernameEntry.delete(0,END)
 
 def password_enter(event):
@@ -222,6 +236,40 @@ def handle_click5(page):
     else:
         projects_window.destroy()
         projects_page()
+     
+
+def plus_cocurricular():
+        cocurricular=Tk()    #700x400+300+200
+        cocurricular.title("Co-Curricular")
+        cocurricular.geometry('700x400+300+200')
+        cocurricular.resizable(False,False)
+        cocurricular.configure(bg='#FF3030')
+        # icon_image=PhotoImage(file="co.png")
+        # cocurricular.iconphoto(False,icon_image)
+        activityLabel=Label(cocurricular,text='Activity',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
+        activityLabel.place(x=50,y=100)
+        activity_Combobox=Combobox(cocurricular,values=['Workshop','Hackathon'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
+        activity_Combobox.place(x=200,y=100)
+        activity_Combobox.set('Workshop')
+        Label(cocurricular,text='Co-curricular – discovering what’s possible....',font=('arial 13',16,'bold'),bg="#FF3030",fg="#fff").place(x=150,y=20)
+        conductLabel=Label(cocurricular,text='Conducted By ',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
+        conductLabel.place(x=50,y=150)
+        conductEntry=Entry(cocurricular,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
+        conductEntry.place(x=200,y=150)
+        participationLabel=Label(cocurricular,text='Participation Level',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
+        participationLabel.place(x=40,y=200)
+        part_Combobox=Combobox(cocurricular,values=['Volunteer','Participant'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
+        part_Combobox.place(x=210,y=200)
+        part_Combobox.set('Participant')
+        rankLabel=Label(cocurricular,text='Rank',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
+        rankLabel.place(x=50,y=250)
+        rankEntry=Entry(cocurricular,width=10,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
+        rankEntry.place(x=200,y=250)
+
+        signupButton=Button(cocurricular,text='Submit',font=('Open Sans',16,'bold'),bd=0,bg='blue',fg='white',activebackground='blue',activeforeground='white',width=10, command=cocurricular_execute)
+        signupButton.place(x=300,y=350)
+
+        cocurricular.mainloop()
 
 def login_user():
         global login_window
@@ -375,7 +423,7 @@ def dashboard_page():
         cursor = connection.cursor()
 
     # Execute a SELECT statement to fetch data
-        cursor.execute('''SELECT * FROM registration13 WHERE name=%s''', (username_))
+        cursor.execute('''SELECT  `name`, `age`, `phone_no`, `gender`, `branch`, `degree`, `from_date`, `to_date` FROM `registration13` WHERE email_id=%s''', (username_))
 
     # Fetch all the rows using fetchall() method
         result = cursor.fetchone()
@@ -383,14 +431,14 @@ def dashboard_page():
          # Create a frame for the main content of the window
         content_frame = Frame(dashboard_window)
 
-        name = result[1]
-        age = result[2]
-        phone_no = result[3]
-        gender = result[5]
-        branch = result[6]
-        degree= result[7]
-        from_date= result[8]
-        to_date= result[9]
+        name = result[0]
+        age = result[1]
+        phone_no = result[2]
+        gender = result[3]
+        branch = result[4]
+        degree= result[5]
+        from_date= result[6]
+        to_date= result[7]
 
 
         name_label = Label(content_frame, text="Name: ")
@@ -567,7 +615,7 @@ def cocurricular_page():
         extracurricular_button = Button(navbar_frame, text="Extra-Curricular", command=lambda: handle_click2("extracurricular_page"), width=15, height=5)
         internships_button = Button(navbar_frame, text="Internships", command=lambda: handle_click2("internship_page"), width=15, height=5)
         projects_button = Button(navbar_frame, text="Projects", command=lambda: handle_click2("projects_page"), width=15, height=5)
-        button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65)
+        button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65, command=plus_cocurricular)
 
         # Pack the navbar buttons horizontally
         academics_button.pack(side="left")
@@ -784,7 +832,7 @@ def internship_page():
         cursor = connection.cursor()
 
             # Execute a SELECT statement to fetch data
-        cursor.execute('''SELECT `name`, `domain`, `from_date`, `to_date` FROM `internship` WHERE email_id="%s"''', (username_))
+        cursor.execute('''SELECT `name`, `domain`, `from_date`, `to_date` FROM `internship` WHERE email_id=%s''', (username_))
             
 
             # Fetch all the rows using fetchall() method
