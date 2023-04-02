@@ -759,9 +759,9 @@ def signup():
         heading.grid(row=0,column=5,padx=10,pady=10)
 
         signup_nameLabel=Label(frame,text='Name',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-        signup_nameLabel.grid(row=1,column=6,sticky='w',padx=25,pady=(10,0))
+        signup_nameLabel.grid(row=1,column=0,sticky='w',padx=25,pady=(10,0))
         signup_nameEntry=Entry(frame,width=30,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
-        signup_nameEntry.grid(row=2,column=6,sticky='w',padx=25)
+        signup_nameEntry.grid(row=2,column=0,sticky='w',padx=25)
         signup_nameEntry_get=signup_nameEntry.get()
 
         signup_ageLabel=Label(frame,text='Age',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
@@ -769,26 +769,32 @@ def signup():
         signup_ageEntry=Spinbox(frame,width=10,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1',from_=12 ,to=30)
         signup_ageEntry.grid(row=4,column=0,sticky='w',padx=25)
 
-
-        signup_emailLabel=Label(frame,text='Email',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-        signup_emailLabel.grid(row=1,column=0,sticky='w',padx=25,pady=(10,0))
-        signup_emailEntry=Entry(frame,width=30,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
-        signup_emailEntry.grid(row=2,column=0,sticky='w',padx=25)
+        signup_genLabel=Label(frame,text='Gender',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
+        signup_genLabel.grid(row=5,column=0,sticky='w',padx=25,pady=(10,0))
+        signup_genEntry=Entry(frame,width=20,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
+        signup_genEntry.grid(row=6,column=0,sticky='w',padx=25)
 
         signup_phoneLabel=Label(frame,text='Phone No.',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-        signup_phoneLabel.grid(row=3,column=5,sticky='w',padx=25,pady=(10,0))
+        signup_phoneLabel.grid(row=7,column=0,sticky='w',padx=25,pady=(10,0))
         signup_phoneEntry=Entry(frame,width=20,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
-        signup_phoneEntry.grid(row=4,column=5,sticky='w',padx=25)
+        signup_phoneEntry.grid(row=8,column=0,sticky='w',padx=25)
 
-        signup_genLabel=Label(frame,text='Gender',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-        signup_genLabel.grid(row=3,column=6,sticky='w',padx=25,pady=(10,0))
-        signup_genEntry=Entry(frame,width=20,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
-        signup_genEntry.grid(row=4,column=6,sticky='w',padx=25)
+        signup_emailLabel=Label(frame,text='Email',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
+        signup_emailLabel.grid(row=9,column=0,sticky='w',padx=25,pady=(10,0))
+        signup_emailEntry=Entry(frame,width=30,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
+        signup_emailEntry.grid(row=10,column=0,sticky='w',padx=25)
+
+        signup_schoolLabel=Label(frame,text='School Name',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
+        signup_schoolLabel.grid(row=1,column=1,sticky='w',padx=25,pady=(10,0))
+        signup_emailEntry=Entry(frame,width=20,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
+        signup_emailEntry.grid(row=2,column=1,sticky='w',padx=25)
+
+       
 
         signup_degreeLabel=Label(frame,text='Degree',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-        signup_degreeLabel.grid(row=5,column=0,sticky='w',padx=25,pady=(10,0))
+        signup_degreeLabel.grid(row=3,column=6,sticky='w',padx=25,pady=(10,0))
         signup_degreeEntry=Entry(frame,width=30,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
-        signup_degreeEntry.grid(row=6,column=0,sticky='w',padx=25)
+        signup_degreeEntry.grid(row=4,column=6,sticky='w',padx=25)
 
         signup_branchLabel=Label(frame,text='Branch',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
         signup_branchLabel.grid(row=5,column=5,sticky='w',padx=25,pady=(10,0))
@@ -796,9 +802,9 @@ def signup():
         signup_branchEntry.grid(row=6,column=5,sticky='w',padx=25)
 
         signup_fromLabel=Label(frame,text='From',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-        signup_fromLabel.grid(row=7,column=0,sticky='w',padx=25,pady=(10,0))
+        signup_fromLabel.grid(row=3,column=5,sticky='w',padx=25,pady=(10,0))
         signup_start_year = Spinbox(frame,width=10,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1', from_=2015, to=2030)
-        signup_start_year.grid(row=8,column=0,sticky='w',padx=25)
+        signup_start_year.grid(row=4,column=5,sticky='w',padx=25)
 
         signup_toLabel=Label(frame,text='To',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
         signup_toLabel.grid(row=7,column=5,sticky='w',padx=25,pady=(10,0))
@@ -806,9 +812,9 @@ def signup():
         signup_end_year.grid(row=8,column=5,sticky='w',padx=25)
 
         signup_passwordLabel=Label(frame,text='Password',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-        signup_passwordLabel.grid(row=9,column=0,sticky='w',padx=25,pady=(10,0))
+        signup_passwordLabel.grid(row=1,column=6,sticky='w',padx=25,pady=(10,0))
         signup_passwordEntry=Entry(frame,width=30,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
-        signup_passwordEntry.grid(row=10,column=0,sticky='w',padx=25)
+        signup_passwordEntry.grid(row=2,column=6,sticky='w',padx=25)
 
         signup_confirm_PasswordLabel=Label(frame,text='Confirm Password',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
         signup_confirm_PasswordLabel.grid(row=9,column=6,sticky='w',padx=25,pady=(10,0))
