@@ -6,16 +6,16 @@ from PIL import ImageTk
 # import pymysql
 
 def clear():
-    emailEntry.delete(0,END)
+    signup_emailEntry.delete(0,END)
 
-    passwordEntry.delete(0,END)
-    confirm_PasswordEntry.delete(0,END)
+    signup_passwordEntry.delete(0,END)
+    signup_confirm_PasswordEntry.delete(0,END)
     check.set(0)
 
 def connect_database():
-    if emailEntry.get() == '' or nameEntry.get() == '' or ageEntry.get() == '' or phoneEntry.get() == '' or genEntry.get() == '' or branchEntry.get()=='' or degreeEntry.get()=='' or start_year.get() == '' or end_year.get() == '' or passwordEntry.get()=='' or confirm_PasswordEntry.get()=='':
+    if signup_emailEntry.get() == '' or signup_nameEntry.get() == '' or signup_ageEntry.get() == '' or signup_phoneEntry.get() == '' or signup_genEntry.get() == '' or signup_branchEntry.get()=='' or signup_degreeEntry.get()=='' or signup_start_year.get() == '' or signup_end_year.get() == '' or signup_passwordEntry.get()=='' or signup_confirm_PasswordEntry.get()=='':
         messagebox.showerror('Error','All fields are Required')
-    elif passwordEntry.get() !=confirm_PasswordEntry.get():
+    elif signup_passwordEntry.get() !=signup_confirm_PasswordEntry.get():
         messagebox.showerror('Error', 'Password Mismatch')
     elif check.get()==0:
         messagebox.showerror('Error', 'Please accept Terms and Conditions')
@@ -40,7 +40,7 @@ def connect_database():
         except:
             mycursor.execute('use cv_generator')
         query='select * from registration13 where email_id=%s'
-        mycursor.execute(query,(emailEntry.get()))
+        mycursor.execute(query,(signup_emailEntry.get()))
 
         row=mycursor.fetchone()
 
@@ -49,7 +49,7 @@ def connect_database():
         else:
 
             query='insert into registration13(email_id,name,age,phone_no,password,gender,branch,degree,from_date,to_date) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);'
-            mycursor.execute(query,(emailEntry.get(),nameEntry.get(),ageEntry.get(),phoneEntry.get(),passwordEntry.get(),genEntry.get(),branchEntry.get(),degreeEntry.get(),start_year.get(),end_year.get()))
+            mycursor.execute(query,(signup_emailEntry.get(),signup_nameEntry.get(),signup_ageEntry.get(),signup_phoneEntry.get(),signup_passwordEntry.get(),signup_genEntry.get(),signup_branchEntry.get(),signup_degreeEntry.get(),signup_start_year.get(),signup_end_year.get()))
             con.commit()
             con.close()
             messagebox.showinfo("Success","Registration is successful")
@@ -133,19 +133,6 @@ toLabel=Label(frame,text='To',font=('Microsoft Yahei UI Light',10,'bold'),bg='wh
 toLabel.grid(row=7,column=5,sticky='w',padx=25,pady=(10,0))
 end_year = Spinbox(frame,width=10,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1', from_=2015, to=2030)
 end_year.grid(row=8,column=5,sticky='w',padx=25)
-
-
-
-
-
-
-
-
-# usernameLabel=Label(frame,text='Username',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
-# usernameLabel.grid(row=3,column=0,sticky='w',padx=25,pady=(10,0))
-#
-# usernameEntry=Entry(frame,width=30,font=('Microsoft Yahei UI Light',10,'bold'),fg='white',bg='firebrick1')
-# usernameEntry.grid(row=4,column=0,sticky='w',padx=25)
 
 passwordLabel=Label(frame,text='Password',font=('Microsoft Yahei UI Light',10,'bold'),bg='white',fg='firebrick1')
 passwordLabel.grid(row=9,column=0,sticky='w',padx=25,pady=(10,0))
