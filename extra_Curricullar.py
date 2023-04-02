@@ -4,13 +4,14 @@ import tkinter as tk
 from tkinter import messagebox
 import pathlib
 import pymysql
+from PIL import ImageTk
 
 def connect_database():
     if eventEntry.get() == '' or activityEntry.get() == '' or part_Combobox.get() == '':
         messagebox.showerror('Error','  Please Fill the necessary details!!')
     else:
         try:
-            con=pymysql.connect(host='127.0.0.1',user='root',password='Harshita@030712')
+            con=pymysql.connect(host='157.0.0.1',user='root',password='Harshita@030715')
             mycursor=con.cursor()
         except:
             messagebox.showerror('Error','Connection is not Established')
@@ -24,7 +25,7 @@ def connect_database():
 
         except:
             query = '''insert into 'extra_curricular'('event_name','activity_name','participation_level','rank','description') values (%s,%s,%s,%s,%s))'''
-            mycursor.execute(query, (eventEntry.get(), activityEntry.get(), part_Combobox.get(),rankEntry.get(),descEntry.get("1.0", "end-1c")))
+            mycursor.execute(query, (eventEntry.get(), activityEntry.get(), part_Combobox.get(),rankEntry.get()))
             con.commit()
             con.close()
 
@@ -33,40 +34,46 @@ def connect_database():
 
 extracurricular=Tk()    #700x400+300+200
 extracurricular.title("Extra Curricular")
-extracurricular.geometry('700x400+300+200')
+#extracurricular.geometry('700x400+300+200')
+extracurricular.geometry("{0}x{1}+0+0".format(extracurricular.winfo_screenwidth(), extracurricular.winfo_screenheight()))
 extracurricular.resizable(False,False)
-extracurricular.configure(bg='#FF3030')
+extracurricular.configure(bg='light grey')
 icon_image=PhotoImage(file="extra.png")
 extracurricular.iconphoto(False,icon_image)
-eventLabel=Label(extracurricular,text='Event Name',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-eventLabel.place(x=50,y=100)
+eventLabel=Label(extracurricular,text='Event Name',font=('sifon',15,'bold'),bg='light grey',fg='black')
+eventLabel.place(x=80,y=150)
 
-eventEntry=Entry(extracurricular,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-eventEntry.place(x=200,y=100)
-Label(extracurricular,text='Unleash your creativity with extracurricular activities!',font=("arial 13",16,'bold'),bg="#FF3030",fg="#fff").place(x=100,y=20)
+eventEntry=Entry(extracurricular,width=45,font=('sifon',15,'bold'),fg='black',bg='white')
+eventEntry.place(x=200,y=150)
+background=ImageTk.PhotoImage(file='excurricularform.png')
+
+bgLabel=Label(extracurricular,image=background)
+bgLabel.config(width=700, height=700)
+bgLabel.place(x=750,y=40)
+Label(extracurricular,text='Unleash your creativity with extracurricular activities!',font=("arial 13",16,'bold'),bg="light grey",fg="black").place(x=100,y=50)
 
 
-activityLabel=Label(extracurricular,text='Activities',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-activityLabel.place(x=50,y=150)
-activityEntry=Entry(extracurricular,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-activityEntry.place(x=200,y=150)
-participationLabel=Label(extracurricular,text='Participation Level',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-participationLabel.place(x=40,y=200)
-part_Combobox=Combobox(extracurricular,values=['Volunteer','Participant'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
-part_Combobox.place(x=210,y=200)
+activityLabel=Label(extracurricular,text='Activities',font=('sifon',15,'bold'),bg='light grey',fg='black')
+activityLabel.place(x=70,y=250)
+activityEntry=Entry(extracurricular,width=45,font=('sifon',15,'bold'),fg='black',bg='white')
+activityEntry.place(x=200,y=250)
+participationLabel=Label(extracurricular,text='Participation Level',font=('sifon',15,'bold'),bg='light grey',fg='black')
+participationLabel.place(x=30,y=350)
+part_Combobox=Combobox(extracurricular,values=['Volunteer','Participant'],font=('sifon',15,'bold'),state='r',width=14)
+part_Combobox.place(x=210,y=350)
 part_Combobox.set('Participant')
-rankLabel=Label(extracurricular,text='Rank',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-rankLabel.place(x=400,y=200)
-rankEntry=Entry(extracurricular,width=14,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-rankEntry.place(x=450,y=200)
-descLabel=Label(extracurricular,text='Description',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-descLabel.place(x=50,y=250)
-descEntry = Text(extracurricular,width=50,height=4,bd=4)
-descEntry.place(x=200,y=250)
+rankLabel=Label(extracurricular,text='Rank',font=('sifon',15,'bold'),bg='light grey',fg='black')
+rankLabel.place(x=470,y=350)
+rankEntry=Entry(extracurricular,width=14,font=('sifon',15,'bold'),fg='black',bg='white')
+rankEntry.place(x=540,y=350)
+#descLabel=Label(extracurricular,text='Description',font=('sifon',15,'bold'),bg='light grey',fg='black')
+#descLabel.place(x=50,y=250)
+#descEntry = Text(extracurricular,width=50,height=4,bd=4)
+#descEntry.place(x=200,y=250)
 signupButton=Button(extracurricular,text='Submit',font=('Open Sans',16,'bold'),bd=0,bg='blue',
                     fg='white',activebackground='blue',activeforeground='white',width=10, command=connect_database)
 
-signupButton.place(x=300,y=350)
+signupButton.place(x=300,y=500)
 
 nameValue = StringVar()
 activityValue=StringVar()
