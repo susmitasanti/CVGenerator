@@ -1,6 +1,7 @@
 # signin.py
 
 from tkinter import *
+from tkinter import Tk
 
 import pymysql
 from PIL import ImageTk #pip install pillow
