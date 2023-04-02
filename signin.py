@@ -1,6 +1,7 @@
 # signin.py
 
 from tkinter import *
+from tkinter import Tk
 
 import pymysql
 from PIL import ImageTk #pip install pillow
@@ -9,8 +10,8 @@ from tkinter import messagebox
 from PIL import ImageTk, Image
 from tkinter import ttk
 import pymysql
-from tkhtmlview import *
-from tkinterhtml import HtmlFrame
+
+
 
 
 username_ = ""
