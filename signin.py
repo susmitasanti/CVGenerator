@@ -129,6 +129,9 @@ project=""
 project_nameEntry=""
 project_techstackEntry=""
 project_descEntry=""
+
+background=""
+
  
 def set_username(name):
     global signin
@@ -352,38 +355,56 @@ def plus_academics():
     global academics_part_Combobox
     global academics_CGPIEntry
     global academics_semEntry
+    global background
 
     academics=Tk()    #700x400+300+200
     academics.title("Academics")
-    academics.geometry('700x400+300+200')
+    #academics.geometry('700x400+300+200')
+    academics.geometry("{0}x{1}+0+0".format(academics.winfo_screenwidth(), academics.winfo_screenheight()))
     academics.resizable(False,False)
-    academics.configure(bg='#00BFFF')
+    academics.configure(bg='light grey')
+    # background=ImageTk.PhotoImage(file='academics_form.jpg')
+    img = Image.open("bg.jpg")
+    img_tk = ImageTk.PhotoImage(img)
+
+    bgLabel=Label(academics,image=img_tk)
+    bgLabel.config(width=700, height=700)
+    bgLabel.place(x=750,y=40)
     # icon_image=PhotoImage(file="extra.png")
     # academics.iconphoto(False,icon_image)
-    yearofstudyLabel=Label(academics,text='Year of Study',font=('Microsoft Yahei UI Light',12,'bold'),bg='#00BFFF',fg='#fff')
-    yearofstudyLabel.place(x=50,y=100)
-    academics_part_Combobox=Combobox(academics,values=['First year','Second year','Third year','Fourth year'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
-    academics_part_Combobox.place(x=200,y=100)
-    academics_part_Combobox.set('First year')
+    yearofstudyLabel=Label(academics,text='Year of Study',font=('sifon',15,'bold'),bg='light grey',fg='black')
+    yearofstudyLabel.place(x=200,y=150)
+    part_Combobox=Combobox(academics,values=['First year','Second year','Third year','Fourth year'],font=('sifon',15,'bold'),state='r',width=14)
+    part_Combobox.place(x=380,y=150)
+    part_Combobox.set('First year')
 
-    # yearofstudyEntry=Entry(academics,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
+    # yearofstudyEntry=Entry(academics,width=45,font=('sifon',15,'bold'),fg='black',bg='white')
     # yearofstudyEntry.place(x=200,y=100)
-    Label(academics,text='Value your academics !!',font=("arial 13",16,'bold'),bg="#00BFFF",fg="#fff").place(x=100,y=20)
+    Label(academics,text='Value your academics !!',font=("arial 13",16,'bold'),bg="light grey",fg="black").place(x=300,y=50)
 
     # x=200,y=150
-    CGPILabel=Label(academics,text='CGPI',font=('Microsoft Yahei UI Light',12,'bold'),bg='#00BFFF',fg='#fff')
-    CGPILabel.place(x=50,y=200)
-    academics_CGPIEntry=Entry(academics,width=13,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-    academics_CGPIEntry.place(x=200,y=200)
-    semLabel=Label(academics,text='Sem',font=('Microsoft Yahei UI Light',12,'bold'),bg='#00BFFF',fg='#fff')
-    semLabel.place(x=50,y=150)
-    academics_semEntry=Combobox(academics,values=['Sem I','Sem II','Sem III','Sem IV','Sem V','Sem VI','Sem VII','Sem VIII'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
-    academics_semEntry.place(x=200,y=150)
-    academics_semEntry.set('Sem I')
+    CGPILabel=Label(academics,text='CGPI',font=('sifon',15,'bold'),bg='light grey',fg='black')
+    CGPILabel.place(x=280,y=250)
+    CGPIEntry=Entry(academics,width=13,font=('sifon',15,'bold'),fg='black',bg='white')
+    CGPIEntry.place(x=380,y=250)
+    semLabel=Label(academics,text='Sem',font=('sifon',15,'bold'),bg='light grey',fg='black')
+    semLabel.place(x=280,y=350)
+    semEntry=Combobox(academics,values=['Sem I','Sem II','Sem III','Sem IV','Sem V','Sem VI','Sem VII','Sem VIII'],font=('sifon',15,'bold'),state='r',width=14)
+    semEntry.place(x=380,y=350)
+    semEntry.set('Sem I')
+    # rankLabel=Label(academics,text='Rank',font=('sifon',15,'bold'),bg='light grey',fg='black')
+    # rankLabel.place(x=400,y=200)
+    # rankEntry=Entry(academics,width=14,font=('sifon',15,'bold'),fg='black',bg='white')
+    # rankEntry.place(x=450,y=200)
+    # descLabel=Label(academics,text='Description',font=('sifon',15,'bold'),bg='light grey',fg='black')
+    # descLabel.place(x=50,y=250)
+    # descEntry = Text(academics,width=50,height=4,bd=4)
+    # descEntry.place(x=200,y=250)
     signupButton=Button(academics,text='Submit',font=('Open Sans',16,'bold'),bd=0,bg='blue',
                         fg='white',activebackground='blue',activeforeground='white',width=10, command=academics_execute)
 
-    signupButton.place(x=300,y=350)
+    signupButton.place(x=300,y=500)
+
 
     academics.mainloop()
 
@@ -410,41 +431,52 @@ def plus_cocurricular():
 
         cocurricular=Tk()    #700x400+300+200
         cocurricular.title("Co-Curricular")
-        cocurricular.geometry('700x400+300+200')
+        #cocurricular.geometry('700x400+300+200')
+        cocurricular.geometry("{0}x{1}+0+0".format(cocurricular.winfo_screenwidth(), cocurricular.winfo_screenheight()))
         cocurricular.resizable(False,False)
-        cocurricular.configure(bg='#FF3030')
-        # icon_image=PhotoImage(file="co.png")
-        # cocurricular.iconphoto(False,icon_image)
-        eventLabel=Label(cocurricular,text='Event Name ',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-        eventLabel.place(x=50,y=100)
-        eventEntry=Entry(cocurricular,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-        eventEntry.place(x=200,y=100)
+        cocurricular.configure(bg='light grey')
+        background=ImageTk.PhotoImage(file='cocurricularfimg.png')
 
-        activityLabel=Label(cocurricular,text='Activity',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-        activityLabel.place(x=50,y=150)
-        activity_Combobox=Combobox(cocurricular,values=['Workshop','Hackathon'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
+        bgLabel=Label(cocurricular,image=background)
+        bgLabel.config(width=700, height=700)
+        bgLabel.place(x=750,y=40)
+        icon_image=PhotoImage(file="co.png")
+        cocurricular.iconphoto(False,icon_image)
+        activityLabel=Label(cocurricular,text='Activity',font=('sifon',15,'bold'),bg='light grey',fg='black')
+        activityLabel.place(x=80,y=150)
+        activity_Combobox=Combobox(cocurricular,values=['Workshop','Hackathon'],font=('sifon',15,'bold'),state='r',width=14)
         activity_Combobox.place(x=200,y=150)
         activity_Combobox.set('Workshop')
-        Label(cocurricular,text='Co-curricular – discovering what’s possible....',font=('arial 13',16,'bold'),bg="#FF3030",fg="#fff").place(x=150,y=20)
-        
-        conductLabel=Label(cocurricular,text='Conducted By ',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-        conductLabel.place(x=50,y=200)
-        conductEntry=Entry(cocurricular,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-        conductEntry.place(x=200,y=200)
-        participationLabel=Label(cocurricular,text='Participation Level',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-        participationLabel.place(x=50,y=250)
-        part_Combobox=Combobox(cocurricular,values=['Volunteer','Participant'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
-        part_Combobox.place(x=210,y=250)
-        part_Combobox.set('Participant')
-        rankLabel=Label(cocurricular,text='Rank',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-        rankLabel.place(x=50,y=300)
-        rankEntry=Entry(cocurricular,width=10,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-        rankEntry.place(x=200,y=300)
 
-        signupButton=Button(cocurricular,text='Submit',font=('Open Sans',16,'bold'),bd=0,bg='blue',fg='white',activebackground='blue',activeforeground='white',width=10, command=cocurricular_execute)
-        signupButton.place(x=300,y=350)
+
+        Label(cocurricular,text='Co-curricular – discovering what’s possible....',font=('sifon',20,'bold'),bg="light grey",fg="black").place(x=90,y=40)
+
+
+        conductLabel=Label(cocurricular,text='Conducted By ',font=('sifon',15,'bold'),bg='light grey',fg='black')
+        conductLabel.place(x=50,y=250)
+        conductEntry=Entry(cocurricular,width=45,font=('sifon',15,'bold'),fg='black',bg='white')
+        conductEntry.place(x=200,y=250)
+        participationLabel=Label(cocurricular,text='Participation Level',font=('sifon',15,'bold'),bg='light grey',fg='black')
+        participationLabel.place(x=30,y=350)
+        part_Combobox=Combobox(cocurricular,values=['Volunteer','Participant'],font=('sifon',15,'bold'),state='r',width=14)
+        part_Combobox.place(x=210,y=350)
+        part_Combobox.set('Participant')
+        #descLabel=Label(cocurricular,text='Description',font=('Sifon',15,'bold'),bg='light grey',fg='black')
+        #descLabel.place(x=80,y=450)
+        #descEntry = Text(cocurricular,width=50,height=6,bd=4)
+        #descEntry.place(x=200,y=450)
+        signupButton=Button(cocurricular,text='Submit',font=('sifon',15,'bold'),bd=0,bg='blue',
+                            fg='white',activebackground='light grey',activeforeground='white',width=10, )
+        #command=connect_database
+        signupButton.place(x=300,y=500)
+
+
+        nameValue = StringVar()
+        activityValue=StringVar()
 
         cocurricular.mainloop()
+
+
 
 def extracurricular_execute():
     global username_
