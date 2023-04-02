@@ -8,16 +8,16 @@ from PIL import ImageTk
 # import pymysql
 
 def clear():
-    signup_emailEntry.delete(0,END)
+    emailEntry.delete(0,END)
 
-    signup_passwordEntry.delete(0,END)
-    signup_confirm_PasswordEntry.delete(0,END)
+    passwordEntry.delete(0,END)
+    confirm_PasswordEntry.delete(0,END)
     check.set(0)
 
 def connect_database():
     if emailEntry.get("1.0","end-1c") == '' or nameEntry.get("1.0","end-1c") == '' or ageEntry.get("1.0","end-1c") == '' or phoneEntry.get("1.0","end-1c") == '' or genEntry.get("1.0","end-1c") == '' or branchEntry.get("1.0","end-1c")=='' or degreeEntry.get("1.0","end-1c")=='' or start_year.get("1.0","end-1c") == '' or end_year.get("1.0","end-1c") == '' or passwordEntry.get("1.0","end-1c")=='' or confirm_PasswordEntry.get("1.0","end-1c")=='':
         messagebox.showerror('Error','All fields are Required')
-    elif signup_passwordEntry.get() !=signup_confirm_PasswordEntry.get():
+    elif passwordEntry.get() !=confirm_PasswordEntry.get():
         messagebox.showerror('Error', 'Password Mismatch')
     elif check.get()==0:
         messagebox.showerror('Error', 'Please accept Terms and Conditions')
@@ -42,7 +42,7 @@ def connect_database():
         except:
             mycursor.execute('use cv_generator')
         query='select * from registration13 where email_id=%s'
-        mycursor.execute(query,(signup_emailEntry.get()))
+        mycursor.execute(query,(emailEntry.get()))
 
         row=mycursor.fetchone()
 
@@ -51,12 +51,12 @@ def connect_database():
         else:
 
             query='insert into registration13(email_id,name,age,phone_no,password,gender,branch,degree,from_date,to_date) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);'
-            mycursor.execute(query,(signup_emailEntry.get(),signup_nameEntry.get(),signup_ageEntry.get(),signup_phoneEntry.get(),signup_passwordEntry.get(),signup_genEntry.get(),signup_branchEntry.get(),signup_degreeEntry.get(),signup_start_year.get(),signup_end_year.get()))
+            mycursor.execute(query,(emailEntry.get(),nameEntry.get(),ageEntry.get(),phoneEntry.get(),passwordEntry.get(),genEntry.get(),branchEntry.get(),degreeEntry.get(),start_year.get(),end_year.get()))
             con.commit()
             con.close()
             messagebox.showinfo("Success","Registration is successful")
             clear()
-            signup_window.destroy()
+            window.destroy()
             import signin
 
 
@@ -66,7 +66,7 @@ def connect_database():
 
 
 def login_page():
-    signup_window.destroy()
+    window.destroy()
     import signin
 
 
@@ -78,17 +78,17 @@ def login_page():
 
 
 
-signup_window=Tk()
-signup_window.title('Signup Page')
-signup_window.geometry("{0}x{1}+0+0".format(signup_window.winfo_screenwidth(), signup_window.winfo_screenheight()))
-signup_window.resizable(False,False)
+window=Tk()
+window.title('Signup Page')
+window.geometry("{0}x{1}+0+0".format(window.winfo_screenwidth(), window.winfo_screenheight()))
+window.resizable(False,False)
 background=ImageTk.PhotoImage(file='reg_bg.png')
 
-bgLabel=Label(signup_window,image=background)
+bgLabel=Label(window,image=background)
 bgLabel.config(width=800, height=800)
 bgLabel.place(x=0,y=0)
 #bgLabel.grid()
-frame=Frame(signup_window,bg='light blue')
+frame=Frame(window,bg='light blue')
 
 frame.config(width=760, height=800)
 frame.place(x=760,y=10)
@@ -275,4 +275,4 @@ alreadyaccount.place(x=270,y=700)
 loginButton=Button(frame,text='Log in',font=('Open Sans',15,'bold underline'),bg='light blue',fg='black',bd=0,cursor='hand2',activebackground='white',activeforeground='blue',command=login_page)
 loginButton.place(x=330,y=740)
 
-signup_window.mainloop()
+window.mainloop()
