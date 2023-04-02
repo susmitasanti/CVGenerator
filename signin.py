@@ -41,6 +41,10 @@ extracurricular_window=""
 projects_page=""
 projects_window=""
 
+academics_part_Combobox=""
+academics_CGPIEntry=""
+academics_semEntry=""
+
 eventEntry=""
 activity_Combobox=""
 conductEntry=""
@@ -62,6 +66,8 @@ skill1_Entry=""
 skill2_Entry=""
 skill3_Entry=""
 skill4_Entry=""
+skill5_Entry=""
+skill6_Entry=""
 resume_nameEntry=""
 
 signup_window=""
@@ -330,6 +336,56 @@ def handle_click5(page):
          dashboard_page()
 
 
+def academics_execute():
+    global academics_part_Combobox
+    global academics_CGPIEntry
+    global academics_semEntry
+
+    cursor = connection.cursor()
+
+    cursor.execute('''INSERT INTO `academics`(`email_id`, `year_of_study`, `sem`, `cgpi`) VALUES (%s,%s,%s,%s)''', ((username_), academics_part_Combobox.get(), academics_semEntry.get(), academics_CGPIEntry.get()))
+
+    connection.commit() 
+
+def plus_academics():
+    global academics_part_Combobox
+    global academics_CGPIEntry
+    global academics_semEntry
+
+    academics=Tk()    #700x400+300+200
+    academics.title("Academics")
+    academics.geometry('700x400+300+200')
+    academics.resizable(False,False)
+    academics.configure(bg='#00BFFF')
+    # icon_image=PhotoImage(file="extra.png")
+    # academics.iconphoto(False,icon_image)
+    yearofstudyLabel=Label(academics,text='Year of Study',font=('Microsoft Yahei UI Light',12,'bold'),bg='#00BFFF',fg='#fff')
+    yearofstudyLabel.place(x=50,y=100)
+    academics_part_Combobox=Combobox(academics,values=['First year','Second year','Third year','Fourth year'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
+    academics_part_Combobox.place(x=200,y=100)
+    academics_part_Combobox.set('First year')
+
+    # yearofstudyEntry=Entry(academics,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
+    # yearofstudyEntry.place(x=200,y=100)
+    Label(academics,text='Value your academics !!',font=("arial 13",16,'bold'),bg="#00BFFF",fg="#fff").place(x=100,y=20)
+
+    # x=200,y=150
+    CGPILabel=Label(academics,text='CGPI',font=('Microsoft Yahei UI Light',12,'bold'),bg='#00BFFF',fg='#fff')
+    CGPILabel.place(x=50,y=200)
+    academics_CGPIEntry=Entry(academics,width=13,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
+    academics_CGPIEntry.place(x=200,y=200)
+    semLabel=Label(academics,text='Sem',font=('Microsoft Yahei UI Light',12,'bold'),bg='#00BFFF',fg='#fff')
+    semLabel.place(x=50,y=150)
+    academics_semEntry=Combobox(academics,values=['Sem I','Sem II','Sem III','Sem IV','Sem V','Sem VI','Sem VII','Sem VIII'],font=('Microsoft Yahei UI Light',10,'bold'),state='r',width=14)
+    academics_semEntry.place(x=200,y=150)
+    academics_semEntry.set('Sem I')
+    signupButton=Button(academics,text='Submit',font=('Open Sans',16,'bold'),bd=0,bg='blue',
+                        fg='white',activebackground='blue',activeforeground='white',width=10, command=academics_execute)
+
+    signupButton.place(x=300,y=350)
+
+    academics.mainloop()
+
 def cocurricular_execute():
     global username_
     global activity_Combobox
@@ -564,6 +620,7 @@ def plus_project():
     signupButton.place(x=300,y=350)
 
     project.mainloop()
+
 
 def fetch_variables():
     global project_1_name
@@ -863,14 +920,14 @@ def login_page():
         frame1=Frame(login_window,width=250,height=2,bg='firebrick1')
         frame1.place(x=580,y=222)
 
-        passwordEntry=Entry(login_window,width=25,font=('Microsoft Yahei UI Light',11,'bold'),bd=0,fg='firebrick1')
+        passwordEntry=Entry(login_window,width=25,font=('Microsoft Yahei UI Light',11,'bold'),bd=0,fg='firebrick1', show="*")
         passwordEntry.place(x=580,y=260)
         passwordEntry.insert(0,'Password')
         passwordEntry.bind('<FocusIn>',password_enter)
         frame2=Frame(login_window,width=250,height=2,bg='firebrick1')
         frame2.place(x=580,y=282)
 
-        openeye=PhotoImage(file='openeye.png')
+        openeye=PhotoImage(file='closeye.png')
         eyeButton=Button(login_window,image=openeye,bd=0,bg='white',activebackground='white',cursor='hand2',command=hide)
         eyeButton.place(x=800,y=255)
 
@@ -1065,7 +1122,7 @@ def academics_page():
             extracurricular_button = Button(navbar_frame, text="Extra-Curricular", command=lambda: handle_click1("extracurricular_page"), width=15, height=5)
             internships_button = Button(navbar_frame, text="Internships", command=lambda: handle_click1("internship_page"), width=15, height=5)
             projects_button = Button(navbar_frame, text="Projects", command=lambda: handle_click1("projects_page"), width=15, height=5)
-            button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65)
+            button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65, command=plus_academics)
 
             # Pack the navbar buttons horizontally
             dashboard_button.pack(side="left")
@@ -1091,7 +1148,7 @@ def academics_page():
             cursor = connection.cursor()
 
             # Execute a SELECT statement to fetch data
-            cursor.execute('''SELECT * FROM internship WHERE email_id=%s''', (username_))
+            cursor.execute('''SELECT `year_of_study`, `sem`, `cgpi` FROM `academics` WHERE email_id=%s''', (username_))
             # Fetch all the rows using fetchall() method
             data = cursor.fetchall()
 
@@ -1102,22 +1159,22 @@ def academics_page():
             tree = ttk.Treeview(academics_window)
 
             # Define columns
-            tree["columns"] = ("column1", "column2", "column3", "column4")
+            tree["columns"] = ("column1", "column2", "column3")
 
             # Format columns
             tree.column("#0", width=0, stretch=NO)
             tree.column("column1", width=195, anchor=CENTER)
             tree.column("column2", width=195, anchor=CENTER)
             tree.column("column3", width=195, anchor=CENTER)
-            tree.column("column4", width=195, anchor=CENTER)
+            
 
 
             # Add headings
             tree.heading("#0", text="", anchor=CENTER)
-            tree.heading("column1", text="Internship Name", anchor=CENTER)
-            tree.heading("column2", text="Domain", anchor=CENTER)
-            tree.heading("column3", text="From", anchor=CENTER)
-            tree.heading("column4", text="To", anchor=CENTER)
+            tree.heading("column1", text="Year of Study", anchor=CENTER)
+            tree.heading("column2", text="Semester", anchor=CENTER)
+            tree.heading("column3", text="CGPI", anchor=CENTER)
+            
 
 
             # Add data to treeview
@@ -1540,6 +1597,8 @@ def add_info():
         global skill2_Entry
         global skill3_Entry
         global skill4_Entry
+        global skill5_Entry
+        global skill6_Entry
         
         global resume_nameEntry
         global add_information
@@ -1595,10 +1654,21 @@ def add_info():
         skill4_Entry=Entry(add_information,width=15,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
         skill4_Entry.place(x=470,y=350)
 
+        skill5_Label=Label(add_information,text='Skill 5',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
+        skill5_Label.place(x=100,y=400)
+        skill5_Entry=Entry(add_information,width=15,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
+        skill5_Entry.place(x=200,y=400)
+
+        skill6_Label=Label(add_information,text='Skill 6',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
+        skill6_Label.place(x=370,y=400)
+        skill6_Entry=Entry(add_information,width=15,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
+        skill6_Entry.place(x=470,y=400)
+
+
         resume_nameLabel=Label(add_information,text='Resume Name',font=('Microsoft Yahei UI Light',12,'bold'),bg='#FF3030',fg='#fff')
-        resume_nameLabel.place(x=50,y=400)
+        resume_nameLabel.place(x=50,y=450)
         resume_nameEntry=Entry(add_information,width=45,font=('Microsoft Yahei UI Light',12,'bold'),fg='black',bg='white')
-        resume_nameEntry.place(x=200,y=400)
+        resume_nameEntry.place(x=200,y=450)
 
         addButton=Button(add_information,text='Add',font=('Open Sans',16,'bold'),bd=0,bg='blue',
                             fg='white',activebackground='blue',activeforeground='white',width=10, command=fetch_variables)
@@ -1633,6 +1703,8 @@ def create():
     global skill2_Entry
     global skill3_Entry
     global skill4_Entry
+    global skill5_Entry
+    global skill6_Entry
     global resume_nameEntry
 
     global project_1_name
@@ -1659,7 +1731,7 @@ def create():
 
     Name = name
     Title = titleEntry.get()
-    Contact = addressEntry.get(),'\n',username_,'\n',linkedInEntry.get(),'\n',gitEntry.get()
+    Contact = f"{addressEntry.get()}\n{username_}\n{linkedInEntry.get()}\n{gitEntry.get()}"
     ProjectsHeader = 'PROJECTS/PUBLICATIONS'
     ProjectOneTitle = project_1_name
     ProjectOneDesc = project_1_desc
@@ -1670,13 +1742,13 @@ def create():
     # Portfolio = 'Portfolio: rebrand.ly/ekirkland'
     WorkHeader = 'EXPERIENCE'
     WorkOneTitle = internship_1_name
-    WorkOneTime = internship_1_from, '-' ,internship_1_to
+    WorkOneTime = f"{internship_1_from} - {internship_1_to}"
     WorkOneDesc = internship_1_desc
     WorkTwoTitle = internship_2_name
-    WorkTwoTime = internship_2_from,"-",internship_2_to
+    WorkTwoTime =  f"{internship_2_from} - {internship_2_to}"
     WorkTwoDesc = internship_2_desc
     WorkThreeTitle = internship_3_name
-    WorkThreeTime = internship_3_from,"-",internship_3_to
+    WorkThreeTime =  f"{internship_3_from} - {internship_3_to}"
     WorkThreeDesc = internship_3_desc
     EduHeader = 'EDUCATION'
     EduOneTitle = 'Example University, Bachelor of Business Administration'
@@ -1685,7 +1757,7 @@ def create():
     EduTwoTitle = 'Example University, Master of Arts'
     EduTwoTime = '2013-2017'
     SkillsHeader = 'Skills'
-    SkillsDesc = '- Python\n- Pandas\n- NumPy\n- Data Visualization\n- Data Cleaning\n- Command Line\n- Git and Version Control\n- SQL\n- APIs\n- Probability/Statistics\n- Data Manipulation\n- Excel'
+    SkillsDesc = f"-{skill1_Entry.get()}\n-{skill2_Entry.get()}\n-{skill3_Entry.get()}\n-{skill4_Entry.get()}\n-{skill5_Entry.get()}\n-{skill6_Entry.get()}"
     # ExtrasTitle = 'DataQuest\nData Scientist Path'
     # ExtrasDesc = 'Learned popular data science\nlanguages, data cleaning and\nmanipulation, machine learning \nand statistical analysis'
     # CodeTitle = 'View Portfolio'
@@ -1734,7 +1806,7 @@ def create():
     plt.annotate(EduTwoTitle, (.02,.08), weight='bold', fontsize=10)
     plt.annotate(EduTwoTime, (.02,.065), weight='regular', fontsize=9, alpha=.6)
     plt.annotate(SkillsHeader, (.7,.8), weight='bold', fontsize=10, color='#ffffff')
-    plt.annotate(SkillsDesc, (.7,.56), weight='regular', fontsize=10, color='#ffffff')
+    plt.annotate(SkillsDesc, (.7,.65), weight='regular', fontsize=10, color='#ffffff')
     # plt.annotate(ExtrasTitle, (.7,.43), weight='bold', fontsize=10, color='#ffffff')
     # plt.annotate(ExtrasDesc, (.7,.345), weight='regular', fontsize=10, color='#ffffff')
     # plt.annotate(CodeTitle, (.7,.2), weight='bold', fontsize=10, color='#ffffff')
