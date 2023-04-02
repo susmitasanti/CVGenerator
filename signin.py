@@ -1674,13 +1674,13 @@ def add_info():
         addButton=Button(add_information,text='Add',font=('Open Sans',16,'bold'),bd=0,bg='blue',
                             fg='white',activebackground='blue',activeforeground='white',width=10, command=fetch_variables)
 
-        addButton.place(x=200,y=450)
+        addButton.place(x=200,y=500)
 
 
         createButton=Button(add_information,text='Create',font=('Open Sans',16,'bold'),bd=0,bg='blue',
                             fg='white',activebackground='blue',activeforeground='white',width=10, command=create)
 
-        createButton.place(x=300,y=450)
+        createButton.place(x=300,y=500)
 
 
         add_information.mainloop()
@@ -1786,9 +1786,9 @@ def create():
     plt.annotate(ProjectOneTitle, (.02,.832), weight='bold', fontsize=10)
     plt.annotate(ProjectOneDesc, (.04,.78), weight='regular', fontsize=9)
     plt.annotate(ProjectTwoTitle, (.02,.745), weight='bold', fontsize=10)
-    plt.annotate(ProjectTwoDesc, (.04,.70), weight='regular', fontsize=9)
+    plt.annotate(ProjectTwoDesc, (.04,.693), weight='regular', fontsize=9)
     plt.annotate(ProjectThreeTitle, (.02,.672), weight='bold', fontsize=10)
-    plt.annotate(ProjectThreeDesc, (.04,.635), weight='regular', fontsize=9)
+    plt.annotate(ProjectThreeDesc, (.04,.62), weight='regular', fontsize=9)
     # plt.annotate(Portfolio, (.02,.6), weight='bold', fontsize=10)
     plt.annotate(WorkHeader, (.02,.54), weight='bold', fontsize=10, color='#58C1B2')
     plt.annotate(WorkOneTitle, (.02,.508), weight='bold', fontsize=10)
@@ -1799,7 +1799,7 @@ def create():
     plt.annotate(WorkTwoDesc, (.04,.337), weight='regular', fontsize=9)
     plt.annotate(WorkThreeTitle, (.02,.295), weight='bold', fontsize=10)
     plt.annotate(WorkThreeTime, (.02,.28), weight='regular', fontsize=9, alpha=.6)
-    plt.annotate(WorkThreeDesc, (.04,.245), weight='regular', fontsize=9)
+    plt.annotate(WorkThreeDesc, (.04,.232), weight='regular', fontsize=9)
     plt.annotate(EduHeader, (.02,.185), weight='bold', fontsize=10, color='#58C1B2')
     plt.annotate(EduOneTitle, (.02,.155), weight='bold', fontsize=10)
     plt.annotate(EduOneTime, (.02,.14), weight='regular', fontsize=9, alpha=.6)
