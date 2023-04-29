@@ -904,44 +904,7 @@ def signup():
         signup_end_year.config(width=9)
         signup_end_year.place(x=630,y=380)
 
-        # start_year1 = Spinbox(frame,width=10,font=('Open Sans',10,'bold'),fg='black',bg='white', from_=2015, to=2030)
-        # #start_year.grid(row=8,column=0,sticky='w',padx=25)
-        # start_year1.config(width=9)
-        # start_year1.place(x=490,y=510)
-
-
-        # Create a Spinbox widget for the ending year
-        # toLabel1=Label(frame,text='To',font=('Open Sans',15,'bold'),bg='light blue',fg='black')
-        # #toLabel.grid(row=7,column=5,sticky='w',padx=25,pady=(10,0))
-        # toLabel1.config(width=5,height=1)
-        # toLabel1.place(x=570,y=510)
-        # end_year1 = Spinbox(frame,width=10,font=('Open Sans',10,'bold'),fg='black',bg='white', from_=2015, to=2030)
-        # #end_year.grid(row=8,column=5,sticky='w',padx=25)
-        # end_year1.config(width=9)
-        # end_year1.place(x=630,y=510)
-
-        # start_year2 = Spinbox(frame,width=10,font=('Open Sans',10,'bold'),fg='black',bg='white', from_=2015, to=2030)
-        # #start_year.grid(row=8,column=0,sticky='w',padx=25)
-        # start_year2.config(width=9)
-        # start_year2.place(x=490,y=570)
-
-
-        # Create a Spinbox widget for the ending year
-        # toLabel2=Label(frame,text='To',font=('Open Sans',15,'bold'),bg='light blue',fg='black')
-        # #toLabel.grid(row=7,column=5,sticky='w',padx=25,pady=(10,0))
-        # toLabel2.config(width=5,height=1)
-        # toLabel2.place(x=570,y=570)
-        # end_year2 = Spinbox(frame,width=10,font=('Open Sans',10,'bold'),fg='black',bg='white', from_=2015, to=2030)
-        # #end_year.grid(row=8,column=5,sticky='w',padx=25)
-        # end_year2.config(width=9)
-        # end_year2.place(x=630,y=570)
-
-        # usernameLabel=Label(frame,text='Username',font=('sifon',10,'bold'),bg='white',fg='firebrick1')
-        # usernameLabel.grid(row=3,column=0,sticky='w',padx=25,pady=(10,0))
-        #
-        # usernameEntry=Entry(frame,width=30,font=('sifon',10,'bold'),fg='white',bg='firebrick1')
-        # usernameEntry.grid(row=4,column=0,sticky='w',padx=25)
-
+       
         passwordLabel=Label(frame,text='Password',font=('Open Sans',15,'bold'),bg='light blue',fg='black')
         #passwordLabel.grid(row=9,column=6,sticky='w',padx=25,pady=(10,0))
         passwordLabel.config(width=25,height=1)
@@ -1103,6 +1066,9 @@ def dashboard_page():
 
         img_tk = ImageTk.PhotoImage(img)
 
+        background=Image.open("dashboard.png")
+        imgbg=ImageTk.PhotoImage(background)
+
 
         # Create a frame to hold the navbar buttons
         navbar_frame = Frame(dashboard_window, padx=15, pady=15)
@@ -1115,8 +1081,8 @@ def dashboard_page():
         internships_button = Button(navbar_frame, text="Internships",  width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click("internship_page")) # , command=lambda: handle_click("internship_page")
         projects_button = Button(navbar_frame, text="Projects", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click("projects_page")) # , command=lambda: handle_click("projects_page")
         button = Button(navbar_frame, text="Create", compound="left", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=add_info) #, command=add_info
-        # button = Button(navbar_frame, compound="left", width=5, height=5)
-
+        bg = Button(dashboard_window, image=imgbg, compound="left", width=600, height=600, bg='white', fg='black', font=('Open Sans', 10, 'bold'))
+        
 
 
     # Pack the navbar buttons horizontally
@@ -1127,6 +1093,7 @@ def dashboard_page():
         internships_button.pack(side="left")
         projects_button.pack(side="left")
         button.pack(side="right")
+        bg.pack(side="right")
 
 
     # Pack the navbar frame at the top of the window
@@ -1148,7 +1115,7 @@ def dashboard_page():
         result = cursor.fetchone()
 
          # Create a frame for the main content of the window
-        content_frame = Frame(dashboard_window,bg="light blue")
+        content_frame = Frame(dashboard_window,bg="light grey")
         content_frame.config(height=60,width=50)
         content_frame.place(x=100,y=200)
 
@@ -1162,40 +1129,40 @@ def dashboard_page():
         to_date= result[7]
 
 
-        name_label = Label(content_frame, text="Name: ",font="35",bg="light blue")
+        name_label = Label(content_frame, text="Name: ",font="35",bg="light grey")
         name_label.place(x=200,y=150)
-        age_label = Label(content_frame, text="Age: ",font="35",bg="light blue")
+        age_label = Label(content_frame, text="Age: ",font="35",bg="light grey")
         age_label.place(x=200,y=200)
-        phone_label = Label(content_frame, text="Phone No.: ",font="35",bg="light blue")
+        phone_label = Label(content_frame, text="Phone No.: ",font="35",bg="light grey")
         phone_label.place(x=200,y=250)
-        gender_label = Label(content_frame, text="Gender: ",font="35",bg="light blue")
+        gender_label = Label(content_frame, text="Gender: ",font="35",bg="light grey")
         gender_label.place(x=200,y=300)
-        branch_label= Label(content_frame, text="Branch: ",font="35",bg="light blue")
+        branch_label= Label(content_frame, text="Branch: ",font="35",bg="light grey")
         branch_label.place(x=200,y=350)
-        degree_label= Label(content_frame, text="Degree: ",font="35",bg="light blue")
+        degree_label= Label(content_frame, text="Degree: ",font="35",bg="light grey")
         degree_label.place(x=200,y=400)
-        from_label= Label(content_frame, text="From: ",font="35",bg="light blue")
+        from_label= Label(content_frame, text="From: ",font="35",bg="light grey")
         from_label.place(x=200,y=450)
-        to_label= Label(content_frame, text="To: ",font="35",bg="light blue")
+        to_label= Label(content_frame, text="To: ",font="35",bg="light grey")
         to_label.place(x=200,y=500)
 
 
 
-        name_value = Label(content_frame, text=name,font="35",bg="light blue")
+        name_value = Label(content_frame, text=name,font="35",bg="light grey")
         name_value.place(x=350,y=150)
-        age_value = Label(content_frame, text=age,font="35",bg="light blue")
+        age_value = Label(content_frame, text=age,font="35",bg="light grey")
         age_value.place(x=350,y=200)
-        phone_value = Label(content_frame, text=phone_no,font="35",bg="light blue")
+        phone_value = Label(content_frame, text=phone_no,font="35",bg="light grey")
         phone_value.place(x=350,y=250)
-        gender_value = Label(content_frame, text=gender,font="35",bg="light blue")
+        gender_value = Label(content_frame, text=gender,font="35",bg="light grey")
         gender_value.place(x=350,y=300)
-        branch_value = Label(content_frame, text=branch,font="35",bg="light blue")
+        branch_value = Label(content_frame, text=branch,font="35",bg="light grey")
         branch_value.place(x=350,y=350)
-        degree_value = Label(content_frame, text=degree,font="35",bg="light blue")
+        degree_value = Label(content_frame, text=degree,font="35",bg="light grey")
         degree_value.place(x=350,y=400)
-        from_value = Label(content_frame, text=from_date,font="35",bg="light blue")
+        from_value = Label(content_frame, text=from_date,font="35",bg="light grey")
         from_value.place(x=350,y=450)
-        to_value = Label(content_frame, text=to_date,font="35",bg="light blue")
+        to_value = Label(content_frame, text=to_date,font="35",bg="light grey")
         to_value.place(x=350,y=500)
 
         
@@ -1220,11 +1187,14 @@ def academics_page():
             #academics_window.geometry('990x660+50+50')
             academics_window.geometry("{0}x{1}+0+0".format(academics_window.winfo_screenwidth(), academics_window.winfo_screenheight()))
             academics_window.resizable(0,0)
-            academics_window.configure(bg="light blue")
+            academics_window.configure(bg="light grey")
 
             img = Image.open("plus.jpg")
 
             img_tk = ImageTk.PhotoImage(img)
+            background=Image.open("acedemicsform.png")
+            imgbg=ImageTk.PhotoImage(background)
+
 
 
             # Create a frame to hold the navbar buttons
@@ -1239,6 +1209,8 @@ def academics_page():
             internships_button = Button(navbar_frame, text="Internships",  width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click1("internship_page")) # , command=lambda: handle_click1("internship_page")
             projects_button = Button(navbar_frame, text="Projects",  width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click1("projects_page")) # , command=lambda: handle_click1("projects_page")
             button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65, bg='white',fg='black',font=('Open Sans',10,'bold'), command=plus_academics) # , command=plus_academics
+            bg = Button(academics_window, image=imgbg, compound="left", width=600, height=600, bg='white', fg='black', font=('Open Sans', 10, 'bold'))
+
 
             # Pack the navbar buttons horizontally
             dashboard_button.pack(side="left")
@@ -1248,6 +1220,8 @@ def academics_page():
             internships_button.pack(side="left")
             projects_button.pack(side="left")
             button.pack(side="right")
+            bg.pack(side="right")
+
 
             # Pack the navbar frame at the top of the window
             navbar_frame.pack(side="top", fill="x")
@@ -1269,19 +1243,19 @@ def academics_page():
             data = cursor.fetchall()
 
             # Create a frame for the main content of the window
-            content_frame = Frame(academics_window,bg="light blue")
+            content_frame = Frame(academics_window,bg="light grey")
 
             # Create a Treeview widget
-            tree = ttk.Treeview(academics_window)
+            tree = ttk.Treeview(academics_window, height=30)
 
             # Define columns
             tree["columns"] = ("column1", "column2", "column3")
 
             # Format columns
             tree.column("#0", width=0, stretch=NO)
-            tree.column("column1", width=195, anchor=CENTER)
-            tree.column("column2", width=195, anchor=CENTER)
-            tree.column("column3", width=195, anchor=CENTER)
+            tree.column("column1", width=250, anchor=CENTER)
+            tree.column("column2", width=250, anchor=CENTER)
+            tree.column("column3", width=250, anchor=CENTER)
             
 
 
@@ -1321,12 +1295,16 @@ def cocurricular_page():
         #cocurricular_window.geometry('990x660+50+50')
         cocurricular_window.geometry("{0}x{1}+0+0".format(cocurricular_window.winfo_screenwidth(), cocurricular_window.winfo_screenheight()))
         cocurricular_window.resizable(0,0)
-        cocurricular_window.configure(bg="light blue")
+        cocurricular_window.configure(bg="light grey")
 
 
         img = Image.open("plus.jpg")
 
         img_tk = ImageTk.PhotoImage(img)
+
+        # img_tk = ImageTk.PhotoImage(img)
+        background=Image.open("cocurricularfimg.png")
+        imgbg=ImageTk.PhotoImage(background)
 
 
         # Create a frame to hold the navbar buttons
@@ -1340,6 +1318,7 @@ def cocurricular_page():
         internships_button = Button(navbar_frame, text="Internships", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click2("internship_page")) # command=lambda: handle_click2("internship_page")
         projects_button = Button(navbar_frame, text="Projects", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click2("projects_page")) # command=lambda: handle_click2("projects_page")
         button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65, bg='white',fg='black',font=('Open Sans',10,'bold'), command=plus_cocurricular) #command=plus_cocurricular
+        bg = Button(cocurricular_window, image=imgbg, compound="left", width=600, height=600, bg='white', fg='black', font=('Open Sans', 10, 'bold'))
 
 
         # Pack the navbar buttons horizontally
@@ -1350,6 +1329,8 @@ def cocurricular_page():
         internships_button.pack(side="left")
         projects_button.pack(side="left")
         button.pack(side="right")
+        bg.pack(side="right")
+
 
         # Pack the navbar frame at the top of the window
         navbar_frame.pack(side="top", fill="x")
@@ -1372,22 +1353,22 @@ def cocurricular_page():
         data = cursor.fetchall()
 
         # Create a frame for the main content of the window
-        content_frame = Frame(cocurricular_window,bg="light blue")
+        content_frame = Frame(cocurricular_window,bg="light grey")
 
 
         # Create a Treeview widget
-        tree = ttk.Treeview(cocurricular_window)
+        tree = ttk.Treeview(cocurricular_window, height=30)
 
         # Define columns
         tree["columns"] = ("column1", "column2", "column3", "column4", "column5")
 
         # Format columns
         tree.column("#0", width=0, stretch=NO)
-        tree.column("column1", width=195, anchor=CENTER)
-        tree.column("column2", width=195, anchor=CENTER)
-        tree.column("column3", width=195, anchor=CENTER)
-        tree.column("column4", width=195, anchor=CENTER)
-        tree.column("column5", width=195, anchor=CENTER)
+        tree.column("column1", width=200, anchor=CENTER)
+        tree.column("column2", width=200, anchor=CENTER)
+        tree.column("column3", width=200, anchor=CENTER)
+        tree.column("column4", width=200, anchor=CENTER)
+        tree.column("column5", width=200, anchor=CENTER)
 
 
         # Add headings
@@ -1422,13 +1403,15 @@ def extracurricular_page():
 
         extracurricular_window = Tk()
 
-#extracurricular_window.geometry('990x660+50+50')
         extracurricular_window.geometry("{0}x{1}+0+0".format(extracurricular_window.winfo_screenwidth(), extracurricular_window.winfo_screenheight()))
         extracurricular_window.resizable(0,0)
-        extracurricular_window.configure(bg='light blue')
+        extracurricular_window.configure(bg='light grey')
         img = Image.open("plus.jpg")
 
         img_tk = ImageTk.PhotoImage(img)
+
+        background=Image.open("excurricularform.png")
+        imgbg=ImageTk.PhotoImage(background)
 
 
 
@@ -1444,6 +1427,7 @@ def extracurricular_page():
         internships_button = Button(navbar_frame, text="Internships", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click3("internship_page")) # command=lambda: handle_click2("internship_page")
         projects_button = Button(navbar_frame, text="Projects", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click3("projects_page")) # command=lambda: handle_click2("projects_page")
         button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65, bg='white',fg='black',font=('Open Sans',10,'bold'), command=plus_extracurricular) #command=plus_cocurricular
+        bg = Button(extracurricular_window, image=imgbg, compound="left", width=600, height=600, bg='white', fg='black', font=('Open Sans', 10, 'bold'))
 
         # Pack the navbar buttons horizontally
         dashboard_button.pack(side="left")
@@ -1453,6 +1437,8 @@ def extracurricular_page():
         internships_button.pack(side="left")
         projects_button.pack(side="left")
         button.pack(side="right")
+        bg.pack(side="right")
+
 
 
         # Pack the navbar frame at the top of the window
@@ -1477,20 +1463,20 @@ def extracurricular_page():
         data = cursor.fetchall()
 
         # Create a frame for the main content of the window
-        content_frame = Frame(extracurricular_window,bg="light blue")
+        content_frame = Frame(extracurricular_window,bg="light grey")
 
         # Create a Treeview widget
-        tree = ttk.Treeview(extracurricular_window)
+        tree = ttk.Treeview(extracurricular_window, height=30)
 
         # Define columns
         tree["columns"] = ("column1", "column2", "column3", "column4")
 
         # Format columns
         tree.column("#0", width=0, stretch=NO)
-        tree.column("column1", width=195, anchor=CENTER)
-        tree.column("column2", width=195, anchor=CENTER)
-        tree.column("column3", width=195, anchor=CENTER)
-        tree.column("column4", width=195, anchor=CENTER)
+        tree.column("column1", width=250, anchor=CENTER)
+        tree.column("column2", width=250, anchor=CENTER)
+        tree.column("column3", width=250, anchor=CENTER)
+        tree.column("column4", width=250, anchor=CENTER)
 
 
         # Add headings
@@ -1530,10 +1516,12 @@ def internship_page():
         #internship_window.geometry('990x660+50+50')
         internship_window.geometry("{0}x{1}+0+0".format(internship_window.winfo_screenwidth(), internship_window.winfo_screenheight()))
         internship_window.resizable(0,0)
-        internship_window.configure(bg="light blue")
+        internship_window.configure(bg="light grey")
         img = Image.open("plus.jpg")
 
         img_tk = ImageTk.PhotoImage(img)
+        background=Image.open("intershipform.png")
+        imgbg=ImageTk.PhotoImage(background)
 
 
             # Create a frame to hold the navbar buttons
@@ -1548,6 +1536,7 @@ def internship_page():
         internships_button = Button(navbar_frame, text="Internships", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click4("internship_page")) # command=lambda: handle_click2("internship_page")
         projects_button = Button(navbar_frame, text="Projects", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click4("projects_page")) # command=lambda: handle_click2("projects_page")
         button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65, bg='white',fg='black',font=('Open Sans',10,'bold'), command=plus_internship) #command=plus_cocurricular
+        bg = Button(internship_window, image=imgbg, compound="left", width=600, height=600, bg='white', fg='black', font=('Open Sans', 10, 'bold'))
 
 
 
@@ -1559,6 +1548,8 @@ def internship_page():
         internships_button.pack(side="left")
         projects_button.pack(side="left")
         button.pack(side="right")
+        bg.pack(side="right")
+
 
             # Pack the navbar frame at the top of the window
         navbar_frame.pack(side="top", fill="x")
@@ -1582,22 +1573,22 @@ def internship_page():
         data = cursor.fetchall()
 
             # Create a frame for the main content of the window
-        content_frame = Frame(internship_window,bg="light blue")
+        content_frame = Frame(internship_window,bg="light grey")
 
 
             # Create a Treeview widget
-        tree = ttk.Treeview(internship_window)
+        tree = ttk.Treeview(internship_window, height=30)
 
             # Define columns
         tree["columns"] = ("column1", "column2", "column3", "column4", "column5")
 
             # Format columns
         tree.column("#0", width=0, stretch=NO)
-        tree.column("column1", width=195, anchor=CENTER)
-        tree.column("column2", width=195, anchor=CENTER)
-        tree.column("column3", width=195, anchor=CENTER)
-        tree.column("column4", width=195, anchor=CENTER)
-        tree.column("column5", width=195, anchor=CENTER)
+        tree.column("column1", width=200, anchor=CENTER)
+        tree.column("column2", width=200, anchor=CENTER)
+        tree.column("column3", width=200, anchor=CENTER)
+        tree.column("column4", width=200, anchor=CENTER)
+        tree.column("column5", width=200, anchor=CENTER)
 
 
 
@@ -1635,11 +1626,14 @@ def projects_page():
     projects_window=Tk()
     projects_window.geometry("{0}x{1}+0+0".format(projects_window.winfo_screenwidth(), projects_window.winfo_screenheight()))
     projects_window.resizable(0,0)
-    projects_window.configure(bg="light blue")
+    projects_window.configure(bg="light grey")
 
     img = Image.open("plus.jpg")
 
     img_tk = ImageTk.PhotoImage(img)
+
+    background=Image.open("projectform.png")
+    imgbg=ImageTk.PhotoImage(background)
 
 
     # Create a frame to hold the navbar buttons
@@ -1653,6 +1647,7 @@ def projects_page():
     internships_button = Button(navbar_frame, text="Internships", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click5("internship_page")) # command=lambda: handle_click2("internship_page")
     projects_button = Button(navbar_frame, text="Projects", width=15, height=5, bg='white',fg='black',font=('Open Sans',10,'bold'), command=lambda: handle_click5("projects_page")) # command=lambda: handle_click2("projects_page")
     button = Button(navbar_frame, image=img_tk, compound="left", width=60, height=65, bg='white',fg='black',font=('Open Sans',10,'bold'), command=plus_project) #command=plus_cocurricular
+    bg = Button(projects_window, image=imgbg, compound="left", width=600, height=600, bg='white', fg='black', font=('Open Sans', 10, 'bold'))
 
     # Pack the navbar buttons horizontally
     dashboard_button.pack(side="left")
@@ -1662,6 +1657,8 @@ def projects_page():
     internships_button.pack(side="left")
     projects_button.pack(side="left")
     button.pack(side="right")
+    bg.pack(side="right")
+
 
     # Pack the navbar frame at the top of the window
     navbar_frame.pack(side="top", fill="x")
@@ -1683,19 +1680,19 @@ def projects_page():
     data = cursor.fetchall()
 
     # Create a frame for the main content of the window
-    content_frame = Frame(projects_window,bg="light blue")
+    content_frame = Frame(projects_window,bg="light grey")
 
     # Create a Treeview widget
-    tree = ttk.Treeview(projects_window)
+    tree = ttk.Treeview(projects_window, height=30)
 
     # Define columns
     tree["columns"] = ("column1", "column2", "column3")
 
     # Format columns
     tree.column("#0", width=0, stretch=NO)
-    tree.column("column1", width=195, anchor=CENTER)
-    tree.column("column2", width=195, anchor=CENTER)
-    tree.column("column3", width=195, anchor=CENTER)
+    tree.column("column1", width=250, anchor=CENTER)
+    tree.column("column2", width=250, anchor=CENTER)
+    tree.column("column3", width=250, anchor=CENTER)
 
 
     # Add headings
