@@ -1936,12 +1936,10 @@ def create():
     plt.annotate(EduTwoTime, (.02,.065), weight='regular', fontsize=9, alpha=.6)
     plt.annotate(SkillsHeader, (.7,.8), weight='bold', fontsize=10, color='black')
     plt.annotate(SkillsDesc, (.7,.65), weight='regular', fontsize=10, color='black')
-    # plt.annotate(ExtrasTitle, (.7,.43), weight='bold', fontsize=10, color='black')
-    # plt.annotate(ExtrasDesc, (.7,.345), weight='regular', fontsize=10, color='black')
-    # plt.annotate(CodeTitle, (.7,.2), weight='bold', fontsize=10, color='black')
+    
     #add qr code
-    from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
-    import matplotlib.image as mpimg
+    # from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
+    # import matplotlib.image as mpimg
     # arr_code = mpimg.imread('ekresumecode.png')
     # imagebox = OffsetImage(arr_code, zoom=0.5)
     # ab = AnnotationBbox(imagebox, (0.84, 0.12))
